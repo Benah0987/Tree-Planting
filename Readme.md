@@ -26,9 +26,9 @@ You can customize the appearance of the tree and the webpage by modifying the CS
 Adjust the animation parameters and behavior in the script.js file if needed.
 
 # Credits
-to Benayah
+
 The project uses HTML, CSS, and JavaScript.
 The tree animation logic is implemented in the Tree class in the script.js file.
 Date utility functions are provided by the Utils class.
-License
+# License
 This project is licensed under the MIT License.
