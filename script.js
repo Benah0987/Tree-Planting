@@ -133,7 +133,7 @@ class Tree {
 			const wordColors = ['black', 'red', 'green']; // Add more colors if needed
 		
 			const totalWidth = getTotalWidth(words);
-			let currentX = W / 2 - totalWidth / 2;
+			// let currentX = W / 2 - totalWidth / 2;
 			const centerY = H - 20;
 		
 			for (let i = 0; i < words.length; i++) {
