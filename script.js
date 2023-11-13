@@ -75,40 +75,37 @@ class Tree {
 	}
 	draw() {
 		const { c, W, H, debug, branches, fruit } = this;
-
-		c.clearRect(0,0,W,H);
-
+	
+		c.clearRect(0, 0, W, H);
+	
 		const lightness = this.darkTheme ? 90 : 10;
-		const foreground = `hsl(223,10%,${lightness}%)`;
+		const foreground = `hsl(223, 10%, ${lightness}%)`;
 		c.fillStyle = foreground;
 		c.strokeStyle = foreground;
-
+	
 		// debug info
 		if (debug === true) {
 			const textX = 24;
-
-			this.debugInfo.forEach((d,i) => {
-				c.fillText(`${d.item}: ${d.value}`,textX,24 * (i + 1));
+	
+			this.debugInfo.forEach((d, i) => {
+				c.fillText(`${d.item}: ${d.value}`, textX, 24 * (i + 1));
 			});
 		}
-
+	
 		// branches
 		branches.forEach(b => {
 			c.lineWidth = b.diameter;
 			c.beginPath();
-			c.moveTo(b.x1,b.y1);
-			c.lineTo(
-				b.x1 + (b.x2 - b.x1) * b.progress,
-				b.y1 + (b.y2 - b.y1) * b.progress
-			);
+			c.moveTo(b.x1, b.y1);
+			c.lineTo(b.x1 + (b.x2 - b.x1) * b.progress, b.y1 + (b.y2 - b.y1) * b.progress);
 			c.stroke();
 			c.closePath();
 		});
-
+	
 		// fruit
 		fruit.forEach(f => {
 			c.globalAlpha = f.decayTime < f.decayFrames ? f.decayTime / f.decayFrames : 1;
-			c.fillStyle = "red"; // Set fill color to green
+			c.fillStyle = "green"; // Set fill color to green
 			c.beginPath();
 			c.arc(f.x, f.y, f.r * f.progress, 0, 2 * Math.PI);
 			c.fill();
@@ -116,6 +113,7 @@ class Tree {
 			c.globalAlpha = 1;
 		});
 	}
+	
 	grow() {
 		// start with the trunk
 		if (!this.branches.length && Utils.dateValue - this.loopEnd > this.loopDelay) {
