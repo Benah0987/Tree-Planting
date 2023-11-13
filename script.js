@@ -126,19 +126,22 @@ class Tree {
 	
 		// Tree Planting Day message
 		if (message.alpha > 0) {
-			c.fillStyle = `rgba(0, 0, 0, ${message.alpha})`;
 			c.font = `bold ${message.fontSize}px sans-serif`;
 			c.textAlign = 'center';
-
-			const text = message.text;
-			const letterColors = ['black', 'red', 'green']; // Add more colors if needed
-
-			for (let i = 0; i < text.length; i++) {
-				c.fillStyle = letterColors[i] || 'black'; // Default to black if there are more letters than colors
-				c.fillText(text[i], W / 2 - (text.length / 2 - i) * message.fontSize, H - 20);
+		
+			const words = message.text.split(' ');
+			const wordColors = ['black', 'red', 'green']; // Add more colors if needed
+		
+			let currentX = W / 2 - (words.length - 1) * (message.fontSize / 2);
+			const centerY = H - 20;
+		
+			for (let i = 0; i < words.length; i++) {
+				c.fillStyle = wordColors[i % wordColors.length] || 'black'; // Cycle through colors
+				c.fillText(words[i], currentX, centerY);
+				currentX += c.measureText(words[i] + ' ').width; // Add space between words
 			}
-
 		}
+		
 	}
 	
 	
