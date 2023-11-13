@@ -132,13 +132,14 @@ class Tree {
 			const words = message.text.split(' ');
 			const wordColors = ['black', 'red', 'green']; // Add more colors if needed
 		
-			let currentX = W / 2 - getTotalWidth(words.slice(0, 1)) / 2;
+			const totalWidth = getTotalWidth(words);
+			let currentX = W / 2 - totalWidth / 2;
 			const centerY = H - 20;
 		
 			for (let i = 0; i < words.length; i++) {
 				c.fillStyle = wordColors[i % wordColors.length] || 'black'; // Cycle through colors
 				c.fillText(words[i], currentX, centerY);
-				currentX += getTotalWidth(words.slice(i, i + 1)) + 2; // Reduce space between words
+				currentX += c.measureText(words[i]).width + 2; // Reduce space between words
 			}
 		}
 		
@@ -147,6 +148,7 @@ class Tree {
 				return acc + c.measureText(word).width + (index < words.length - 1 ? 2 : 0); // Reduce space between words
 			}, 0);
 		}
+		
 		
 		
 		
