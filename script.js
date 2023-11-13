@@ -144,7 +144,7 @@ class Tree {
 		
 		function getTotalWidth(words) {
 			return words.reduce((acc, word, index) => {
-				return acc + c.measureText(word).width + (index < words.length - 1 ? 10 : 0); // Add space between words
+				return acc + c.measureText(word).width + (index < words.length - 1 ? 5 : 0); // Add space between words
 			}, 0);
 		}
 		
