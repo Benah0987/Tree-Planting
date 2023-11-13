@@ -112,7 +112,14 @@ class Tree {
 			c.closePath();
 			c.globalAlpha = 1;
 		});
+	
+		// Add a section to render the message
+		c.fillStyle = "black";
+		c.font = "bold 24px sans-serif";
+		c.textAlign = "center";
+		c.fillText("Tree Planting Day", W / 2, H - 20);
 	}
+	
 	
 	grow() {
 		// start with the trunk
