@@ -73,6 +73,15 @@ class Tree {
 	detectTheme(mq) {
 		this.darkTheme = mq.matches;
 	}
+	get message() {
+		return {
+			text: "Tree Planting Day",
+			fontSize: 24,
+			alpha: 1,
+			decayTime: 150,
+			progress: 0
+		};
+	}
 	draw() {
 		const { c, W, H, debug, branches, fruit } = this;
 	
@@ -86,12 +95,12 @@ class Tree {
 		// debug info
 		if (debug === true) {
 			const textX = 24;
-	
+
 			this.debugInfo.forEach((d, i) => {
 				c.fillText(`${d.item}: ${d.value}`, textX, 24 * (i + 1));
 			});
 		}
-	
+
 		// branches
 		branches.forEach(b => {
 			c.lineWidth = b.diameter;
@@ -101,7 +110,7 @@ class Tree {
 			c.stroke();
 			c.closePath();
 		});
-	
+
 		// fruit
 		fruit.forEach(f => {
 			c.globalAlpha = f.decayTime < f.decayFrames ? f.decayTime / f.decayFrames : 1;
@@ -112,12 +121,26 @@ class Tree {
 			c.closePath();
 			c.globalAlpha = 1;
 		});
-	
-		// Add a section to render the message
-		c.fillStyle = "black";
-		c.font = "bold 24px sans-serif";
+
+		// Tree Planting Day message
+		if (this.decaying && message.progress < 1) {
+			message.progress += 0.01;
+			message.alpha = 1 - message.progress;
+
+			if (message.progress >= 1) {
+				message.progress = 1;
+				message.decayTime = 150; // Set decay time for the message
+			}
+		} else if (message.decayTime > 0) {
+			message.decayTime--;
+		} else if (message.alpha > 0) {
+			message.alpha -= 0.01;
+		}
+
+		c.fillStyle = `rgba(0, 0, 0, ${message.alpha})`;
+		c.font = `bold ${message.fontSize}px sans-serif`;
 		c.textAlign = "center";
-		c.fillText("Tree Planting Day", W / 2, H - 20);
+		c.fillText(message.text, W / 2, H - 20);
 	}
 	
 	
