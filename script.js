@@ -138,7 +138,7 @@ class Tree {
 			for (let i = 0; i < words.length; i++) {
 				c.fillStyle = wordColors[i % wordColors.length] || 'black'; // Cycle through colors
 				c.fillText(words[i], currentX, centerY);
-				currentX += getTotalWidth(words.slice(i, i + 2)) + 10; // Add space between words
+				currentX += getTotalWidth(words.slice(i, i + 2)) + 5; // Add space between words
 			}
 		}
 		
