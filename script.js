@@ -23,7 +23,7 @@ class Tree {
 		this.maxGenerations = 10;
 		this.message = {
             text: "Tree Planting Day",
-            fontSize: 24,
+            fontSize: 36,
             progress: 0,
             alpha: 1,
             decayTime: 150,
@@ -128,8 +128,16 @@ class Tree {
 		if (message.alpha > 0) {
 			c.fillStyle = `rgba(0, 0, 0, ${message.alpha})`;
 			c.font = `bold ${message.fontSize}px sans-serif`;
-			c.textAlign = "center";
-			c.fillText(message.text, W / 2, H - 20);
+			c.textAlign = 'center';
+
+			const text = message.text;
+			const letterColors = ['black', 'red', 'green']; // Add more colors if needed
+
+			for (let i = 0; i < text.length; i++) {
+				c.fillStyle = letterColors[i] || 'black'; // Default to black if there are more letters than colors
+				c.fillText(text[i], W / 2 - (text.length / 2 - i) * message.fontSize, H - 20);
+			}
+
 		}
 	}
 	
