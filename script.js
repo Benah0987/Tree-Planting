@@ -105,9 +105,10 @@ class Tree {
 
 		// fruit
 		fruit.forEach(f => {
-			c.globalAlpha = f.decayTime	< f.decayFrames ? f.decayTime / f.decayFrames : 1;
+			c.globalAlpha = f.decayTime < f.decayFrames ? f.decayTime / f.decayFrames : 1;
+			c.fillStyle = "green"; // Set fill color to green
 			c.beginPath();
-			c.arc(f.x,f.y,f.r * f.progress,0,2 * Math.PI);
+			c.arc(f.x, f.y, f.r * f.progress, 0, 2 * Math.PI);
 			c.fill();
 			c.closePath();
 			c.globalAlpha = 1;
