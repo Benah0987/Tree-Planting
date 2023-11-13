@@ -1,6 +1,8 @@
-window.addEventListener("DOMContentLoaded",() => {
+window.addEventListener("DOMContentLoaded", () => {
 	const t = new Tree("canvas");
+	t.init(); // Call the init method to start the animation
 });
+
 
 class Tree {
 	constructor(qs) {
@@ -106,7 +108,7 @@ class Tree {
 		// fruit
 		fruit.forEach(f => {
 			c.globalAlpha = f.decayTime < f.decayFrames ? f.decayTime / f.decayFrames : 1;
-			c.fillStyle = "green"; // Set fill color to green
+			c.fillStyle = "red"; // Set fill color to green
 			c.beginPath();
 			c.arc(f.x, f.y, f.r * f.progress, 0, 2 * Math.PI);
 			c.fill();
