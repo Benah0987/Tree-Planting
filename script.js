@@ -138,13 +138,13 @@ class Tree {
 			for (let i = 0; i < words.length; i++) {
 				c.fillStyle = wordColors[i % wordColors.length] || 'black'; // Cycle through colors
 				c.fillText(words[i], currentX, centerY);
-				currentX += getTotalWidth(words.slice(i, i + 1)) + 1.5; // Reduce space between words
+				currentX += getTotalWidth(words.slice(i, i + 1)) + 2; // Reduce space between words
 			}
 		}
 		
 		function getTotalWidth(words) {
 			return words.reduce((acc, word, index) => {
-				return acc + c.measureText(word).width + (index < words.length - 1 ? 1.5 : 0); // Reduce space between words
+				return acc + c.measureText(word).width + (index < words.length - 1 ? 2 : 0); // Reduce space between words
 			}, 0);
 		}
 		
