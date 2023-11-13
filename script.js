@@ -81,64 +81,59 @@ class Tree {
 		this.darkTheme = mq.matches;
 	}
 	draw() {
-        const { c, W, H, debug, branches, fruit, message } = this;
-
-        c.clearRect(0, 0, W, H);
-
-        const lightness = this.darkTheme ? 90 : 10;
-        const foreground = `hsl(223, 10%, ${lightness}%)`;
-        c.fillStyle = foreground;
-        c.strokeStyle = foreground;
-
-        // debug info
-        if (debug === true) {
-            const textX = 24;
-
-            this.debugInfo.forEach((d, i) => {
-                c.fillText(`${d.item}: ${d.value}`, textX, 24 * (i + 1));
-            });
-        }
-
-        // branches
-        branches.forEach((b) => {
-            c.lineWidth = b.diameter;
-            c.beginPath();
-            c.moveTo(b.x1, b.y1);
-            c.lineTo(
-                b.x1 + (b.x2 - b.x1) * b.progress,
-                b.y1 + (b.y2 - b.y1) * b.progress
-            );
-            c.stroke();
-            c.closePath();
-        });
-
-        // fruit
-        fruit.forEach((f) => {
-            c.globalAlpha =
-                f.decayTime < f.decayFrames ? f.decayTime / f.decayFrames : 1;
-            c.fillStyle = "green"; // Set fill color to green
-            c.beginPath();
-            c.arc(f.x, f.y, f.r * f.progress, 0, 2 * Math.PI);
-            c.fill();
-            c.closePath();
-            c.globalAlpha = 1;
-        });
-
-        // Tree Planting Day message
-        if (message.progress < 1) {
-            message.progress += 0.01;
-            message.alpha = 1 - message.progress;
-        } else if (message.decayTime > 0) {
-            message.decayTime--;
-        } else if (message.alpha > 0) {
-            message.alpha -= 0.01;
-        }
-
-        c.fillStyle = `rgba(0, 0, 0, ${message.alpha})`;
-        c.font = `bold ${message.fontSize}px sans-serif`;
-        c.textAlign = "center";
-        c.fillText(message.text, W / 2, H - 20);
-    }
+		const { c, W, H, debug, branches, fruit, message } = this;
+	
+		c.clearRect(0, 0, W, H);
+	
+		const lightness = this.darkTheme ? 90 : 10;
+		const foreground = `hsl(223, 10%, ${lightness}%)`;
+		c.fillStyle = foreground;
+		c.strokeStyle = foreground;
+	
+		// debug info
+		if (debug === true) {
+			const textX = 24;
+	
+			this.debugInfo.forEach((d, i) => {
+				c.fillText(`${d.item}: ${d.value}`, textX, 24 * (i + 1));
+			});
+		}
+	
+		// branches
+		branches.forEach((b) => {
+			c.lineWidth = b.diameter;
+			c.beginPath();
+			c.moveTo(b.x1, b.y1);
+			c.lineTo(
+				b.x1 + (b.x2 - b.x1) * b.progress,
+				b.y1 + (b.y2 - b.y1) * b.progress
+			);
+			c.stroke();
+			c.closePath();
+		});
+	
+		// fruit
+		fruit.forEach((f) => {
+			c.globalAlpha =
+				f.decayTime < f.decayFrames ? f.decayTime / f.decayFrames : 1;
+			c.fillStyle = "green"; // Set fill color to green
+			c.beginPath();
+			c.arc(f.x, f.y, f.r * f.progress, 0, 2 * Math.PI);
+			c.fill();
+			c.closePath();
+			c.globalAlpha = 1;
+		});
+	
+		// Tree Planting Day message
+		if (message.alpha > 0) {
+			c.fillStyle = `rgba(0, 0, 0, ${message.alpha})`;
+			c.font = `bold ${message.fontSize}px sans-serif`;
+			c.textAlign = "center";
+			c.fillText(message.text, W / 2, H - 20);
+		}
+	}
+	
+	
 	
 	grow() {
 		// start with the trunk
